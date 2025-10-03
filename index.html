@@ -3,171 +3,231 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>WITH LOVE TO MY CUTIE-ALL THE BEST FOR YOUR EXAMS 100 QUESTIONS</title>
+  <title>Love Quiz — End Term Java & Spring (100 Qs)</title>
   <style>
-    :root{--bg:#e11ba3;--card:#c671b1;--accent:#06b6d4;--muted:#94a3b8;--correct:#e73aa4;--wrong:#ef4444}
-    body{font-family:Inter,Segoe UI,Roboto,system-ui,Arial;background:linear-gradient(180deg,#bb429e 0%,#ad1c7d 100%);color:#e6eef6;margin:0;padding:24px}
+    :root{
+      --bg:#fff0f6;
+      --card:#fff5fa;
+      --accent:#ff4da6;
+      --muted:#9b8aa6;
+      --correct:#16a34a;
+      --wrong:#ef4444;
+      --heart:#ff69b4;
+    }
+    *{box-sizing:border-box}
+    body{
+      font-family: "Poppins", "Segoe UI", Roboto, Arial, sans-serif;
+      background: linear-gradient(180deg,#fff0f6 0%, #ffe6f6 100%);
+      margin:0; padding:20px; color:#2b1434;
+    }
     .container{max-width:980px;margin:0 auto}
-    header{display:flex;align-items:center;gap:16px;margin-bottom:18px}
-    h1{margin:0;font-size:20px}
-    p.lead{margin:0;color:var(--muted)}
-    .question-card{background:var(--card);border-radius:12px;padding:14px;margin:12px 0;box-shadow:0 6px 18px rgba(2,6,23,0.6)}
-    .qmeta{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
-    .qnum{font-weight:600}
-    .options{display:grid;grid-template-columns:1fr;gap:8px}
-    .opt{background:#071b2a;padding:10px;border-radius:8px;cursor:pointer;border:1px solid transparent}
-    .opt.disabled{opacity:0.7;pointer-events:none}
-    .opt.correct{border-color:rgba(22,163,74,0.35);box-shadow:0 6px 12px rgba(16,185,129,0.06)}
-    .opt.wrong{border-color:rgba(239,68,68,0.25);box-shadow:0 6px 12px rgba(239,68,68,0.04)}
-    .feedback{margin-top:8px;font-weight:600}
-    footer{display:flex;justify-content:space-between;align-items:center;margin-top:18px}
-    button{background:var(--accent);border:none;padding:9px 14px;border-radius:10px;color:#022;cursor:pointer;font-weight:700}
-    .score{font-weight:700}
+    header{display:flex;align-items:center;gap:16px;margin-bottom:20px}
+    h1{margin:0;color:var(--accent);font-size:28px}
+    p.lead{margin:0;color:#7a4a6b}
+    .meta{margin-left:auto;text-align:right}
     .small{font-size:13px;color:var(--muted)}
-    .progress{height:10px;background:#071427;border-radius:999px;overflow:hidden}
-    .bar{height:100%;background:linear-gradient(90deg,var(--accent),#7c3aed);width:0%}
-    .controls{display:flex;gap:8px}
-    @media (max-width:640px){.container{padding:8px}}
+    .progress{height:10px;background:#ffe6f2;border-radius:999px;overflow:hidden;margin-top:8px}
+    .bar{height:100%;background:linear-gradient(90deg,var(--accent),#ff83c2);width:0%}
+    .question-card{background:var(--card);border-radius:14px;padding:14px;margin:14px 0;box-shadow:0 6px 18px rgba(203,97,161,0.08);border:1px solid rgba(255,77,166,0.06)}
+    .qmeta{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+    .qnum{font-weight:700;color:#7c2557}
+    .qtext{font-size:15px;margin-bottom:10px}
+    .options{display:grid;grid-template-columns:1fr;gap:8px}
+    .opt{background:#fff;padding:10px;border-radius:10px;cursor:pointer;border:2px solid transparent; text-align:left}
+    .opt:hover{transform:translateY(-2px);transition:all .12s}
+    .opt.disabled{opacity:0.75;pointer-events:none}
+    .opt.correct{border-color:rgba(22,163,74,0.18);background:linear-gradient(90deg,rgba(22,163,74,0.03),#fff)}
+    .opt.wrong{border-color:rgba(239,68,68,0.12);background:linear-gradient(90deg,rgba(239,68,68,0.03),#fff)}
+    .feedback{margin-top:8px;font-weight:700}
+    footer{display:flex;justify-content:space-between;align-items:center;margin-top:18px;gap:12px;flex-wrap:wrap}
+    button{background:var(--accent);border:none;padding:9px 14px;border-radius:10px;color:#fff;cursor:pointer;font-weight:700}
+    button.secondary{background:#7a4a6b}
+    #finalScore{font-weight:800;color:#7c2557}
+    .section-title{font-size:14px;color:#a04584;margin:8px 0 4px}
+    @media(max-width:640px){h1{font-size:20px}}
   </style>
 </head>
 <body>
   <div class="container">
     <header>
       <div>
-        <h1>WITH LOVE TO MY CUTIE-ALL THE BEST FOR YOUR EXAMS 100 QUESTIONS</h1>
-        <p class="lead">Select an answer for each question. If you are wrong don't feel sad, I am always with you, your nonu. <strong>Show Final Score</strong>.</p>
+        <h1>💕 End Term Java & Spring — Quiz for My Cutie</h1>
+        <p class="lead">100 questions from the syllabus — answer carefully, sweetie! Immediate feedback with love ❤️</p>
       </div>
-      <div style="margin-left:auto;text-align:right">
-        <div class="small">Questions answered: <span id="answeredCount">0</span>/100</div>
-        <div class="progress" style="width:180px;margin-top:8px"><div class="bar" id="progressBar"></div></div>
+      <div class="meta">
+        <div class="small">Answered: <span id="answeredCount">0</span> / 100</div>
+        <div class="progress" style="width:180px"><div class="bar" id="progressBar"></div></div>
       </div>
     </header>
 
     <main id="quiz"></main>
 
     <footer>
-      <div class="controls">
-        <button id="showScore">Show Final Score</button>
-        <button id="resetBtn" style="background:#334155;color:#fff">Reset Quiz</button>
+      <div style="display:flex;gap:8px">
+        <button id="showScore">Show Final Score 💖</button>
+        <button id="resetBtn" class="secondary">Reset Quiz ♻️</button>
       </div>
-      <div class="score" id="finalScore">Score: 0 / 100</div>
+      <div id="finalScore">Score: 0 / 100</div>
     </footer>
   </div>
 
 <script>
+/*
+  100 questions strictly from the provided syllabus.
+  Order (module-wise):
+  Q1-20 Java Essentials
+  Q21-30 Collections
+  Q31-40 Concurrency
+  Q41-45 Maven & Functional
+  Q46-50 JDBC
+  Q51-60 Spring Core (IoC, DI, Beans, MVC)
+  Q61-65 Hibernate
+  Q66-75 Spring Boot
+  Q76-85 Spring Data
+  Q86-90 Microservices (Spring Cloud)
+  Q91-95 Spring MVC / Servlets
+  Q96-100 Testing (JUnit, JMeter)
+*/
+
 const questions = [
-  {q:"1. Which keyword is used to inherit a class in Java?", opts:["implements","extends","inherits","super"], a:1},
-  {q:"2. What does JVM stand for?", opts:["Java Variable Machine","Java Virtual Machine","Java Visual Machine","Java Version Manager"], a:1},
-  {q:"3. Which collection allows duplicate elements?", opts:["Set","List","Map","None"], a:1},
-  {q:"4. Which interface provides methods to iterate over a collection?", opts:["Iterable","Iterator","Collection","Enumeration"], a:1},
-  {q:"5. What is the default value of an object reference in Java?", opts:["0","null","undefined","none"], a:1},
-  {q:"6. Which keyword is used to create an instance of a class?", opts:["new","create","instance","make"], a:0},
-  {q:"7. Which exception is thrown when dividing by zero for integers?", opts:["NullPointerException","ArithmeticException","IndexOutOfBoundsException","ClassCastException"], a:1},
-  {q:"8. What does 'final' keyword mean when applied to a variable?", opts:["Can be reassigned","Cannot be reassigned","Is private","Is static"], a:1},
-  {q:"9. Which feature was introduced in Java 8?", opts:["Generics","Lambda expressions","Annotations","Modules"], a:1},
-  {q:"10. What is a lambda expression used for?", opts:["To create anonymous inner classes","To represent functional interfaces as expressions","To define packages","To manage modules"], a:1},
-  {q:"11. Which annotation marks a test method in JUnit 5?", opts:["@Test","@Before","@After","@RunWith"], a:0},
-  {q:"12. Which stream operation is terminal?", opts:["map","filter","forEach","peek"], a:2},
-  {q:"13. What does Optional.ofNullable(x) return when x is null?", opts:["An empty Optional","A NullPointer","Optional containing null","Throws exception"], a:0},
-  {q:"14. Which I/O class is used to read text files line by line (Java 8+)?", opts:["FileInputStream","BufferedReader","Files.lines","Scanner"], a:2},
-  {q:"15. Which build tool uses a pom.xml file?", opts:["Gradle","Maven","Ant","Make"], a:1},
-  {q:"16. Which file defines a Maven project's artifactId and dependencies?", opts:["build.gradle","pom.xml","settings.xml","manifest.mf"], a:1},
-  {q:"17. Which interface represents a LIFO collection?", opts:["Queue","Deque","Stack behavior via Deque","Set"], a:2},
-  {q:"18. Which data structure uses key-value pairs?", opts:["List","Set","Map","Queue"], a:2},
-  {q:"19. What does 'volatile' keyword guarantee?", opts:["Atomicity","Visibility of changes to variables across threads","Synchronization of method entry","No-optimization"], a:1},
-  {q:"20. Which class is the root of exception hierarchy?", opts:["Throwable","Exception","Error","RuntimeException"], a:0},
-  {q:"21. Which method must be implemented for Runnable?", opts:["start()","run()","call()","execute()"], a:1},
-  {q:"22. What is the purpose of synchronized keyword?", opts:["Garbage collection","Thread-safe access to shared resource","Faster code","Memory allocation"], a:1},
-  {q:"23. What is a daemon thread?", opts:["Thread with highest priority","Background service thread that doesn't prevent JVM exit","UI thread","Thread that is always alive"], a:1},
-  {q:"24. Which Java Memory Model area stores object instances?", opts:["Stack","Heap","Method Area","PC Register"], a:1},
-  {q:"25. What are B02 virtual threads referring to?", opts:["Java EE threads","Lightweight user-mode threads introduced as Project Loom","OS kernel threads","Deprecated concept"], a:1},
-  {q:"26. In Maven, what phase compiles the source code?", opts:["package","compile","install","validate"], a:1},
-  {q:"27. Which of these is a higher-order function concept in Java Streams?", opts:["map","for-loop","new","class"], a:0},
-  {q:"28. What does JDBC stand for?", opts:["Java Database Connectivity","Java Data Bridge Connection","Java DBConnector","Java Data Communication"], a:0},
-  {q:"29. Which JDBC object represents a precompiled SQL statement?", opts:["Statement","PreparedStatement","CallableStatement","ResultSet"], a:1},
-  {q:"30. Which JDBC object holds the result of a query?", opts:["Connection","ResultSet","Statement","Driver"], a:1},
-  {q:"31. What is Spring IoC?", opts:["Input/Output Controller","Inversion of Control — container manages object lifecycle","Internet of Components","Internal Object Cache"], a:1},
-  {q:"32. What does DI stand for in Spring?", opts:["Direct Invocation","Dependency Injection","Data Integration","Dynamic Interface"], a:1},
-  {q:"33. Which annotation marks a class as a Spring component?", opts:["@Component","@ServiceOnly","@Spring","@Bean"], a:0},
-  {q:"34. What is the default scope of a Spring bean?", opts:["prototype","singleton","request","session"], a:1},
-  {q:"35. Which Spring feature allows cross-cutting concerns (AOP)?", opts:["IOC","DI","AOP","MVC"], a:2},
-  {q:"36. Which annotation is used for aspect advice before method execution?", opts:["@Before","@Around","@After","@Pointcut"], a:0},
-  {q:"37. Which Spring module supports web MVC?", opts:["spring-webmvc","spring-data","spring-security","spring-aop"], a:0},
-  {q:"38. What is the role of Spring Boot Starters?", opts:["Replace Spring","Provide opinionated dependency descriptors","Security features","Testing framework"], a:1},
-  {q:"39. What does actuator in Spring Boot provide?", opts:["Deployment tools","Production-ready endpoints for monitoring","UI templates","Database migrations"], a:1},
-  {q:"40. What is an embedded server in Spring Boot?", opts:["A separate process server","Server bundled within app like Tomcat embedded","A cloud server","A remote server"], a:1},
-  {q:"41. Which annotation launches a Spring Boot application?", opts:["@SpringBootApplication","@EnableSpring","@SpringApplication","@AppMain"], a:0},
-  {q:"42. Which HTTP method is idempotent?", opts:["POST","GET","PATCH","None"], a:1},
-  {q:"43. Which Spring annotation maps a method to GET requests?", opts:["@PostMapping","@GetMapping","@RequestBody","@PathVariable"], a:1},
-  {q:"44. Which of these is true about REST?", opts:["Stateful by default","Stateless architecture","Requires SOAP","Uses only XML"], a:1},
-  {q:"45. Which annotation binds a method parameter to a request body?", opts:["@PathVariable","@RequestParam","@RequestBody","@ModelAttribute"], a:2},
-  {q:"46. What is Hibernate ORM used for?", opts:["Object-relational mapping between Java classes and DB tables","Network communication","File storage","Security"], a:0},
-  {q:"47. In Hibernate, what annotation marks a primary key?", opts:["@Column","@Id","@Primary","@Key"], a:1},
-  {q:"48. Which relation is @OneToMany typically paired with?", opts:["@OneToOne","@ManyToOne","@ManyToMany","@ElementCollection"], a:1},
-  {q:"49. What does transaction isolation help to avoid?", opts:["ClassCastException","Concurrency anomalies like dirty reads","NullPointerExceptions","Compilation errors"], a:1},
-  {q:"50. Which annotation declares a transactional method in Spring?", opts:["@Transactional","@Transaction","@Scope","@Service"], a:0},
-  {q:"51. Which Spring project simplifies JPA repositories?", opts:["Spring Data JPA","Spring MVC","Spring Batch","Spring Security"], a:0},
-  {q:"52. What is Spring Data MongoDB used for?", opts:["Relational DB access","Accessing MongoDB using Spring abstractions","Cache management","Messaging"], a:1},
-  {q:"53. Which command starts a Spring Boot app with Maven?", opts:["mvn spring-boot:run","mvn start","mvn run","mvn boot:start"], a:0},
-  {q:"54. Which port is default for embedded Tomcat?", opts:["8080","80","443","3000"], a:0},
-  {q:"55. What is OpenFeign used for?", opts:["Circuit-breaking","Declarative REST client for microservices","Monitoring","Authentication"], a:1},
-  {q:"56. What does a circuit breaker do?", opts:["Delays requests","Prevents cascading failures by short-circuiting calls","Caches responses","Routes traffic"], a:1},
-  {q:"57. What is Spring Cloud Config used for?", opts:["Database config","Centralized externalized configuration for distributed systems","Security config","Logging"], a:1},
-  {q:"58. Which component routes requests in Spring Cloud Gateway?", opts:["Filter","Route predicate & filters","Controller","Repository"], a:1},
-  {q:"59. Which annotation maps exceptions to controller responses?", opts:["@ExceptionHandler","@ControllerAdvice","Both A and B","@ResponseBody"], a:2},
-  {q:"60. What is the default HTTP status for a successful GET?", opts:["200 OK","201 Created","404 Not Found","500 Internal Server Error"], a:0},
-  {q:"61. What is the primary use of JMeter?", opts:["Unit testing","Load and performance testing","Security testing","Database migration"], a:1},
-  {q:"62. Which of these is NOT a Spring Bean scope?", opts:["singleton","prototype","distributed","request"], a:2},
-  {q:"63. Which annotation is used to define a REST controller?", opts:["@Controller","@RestController","@Service","@Repository"], a:1},
-  {q:"64. Which HTTP status code indicates resource created?", opts:["200","201","400","500"], a:1},
-  {q:"65. Which SQL keyword removes duplicate rows?", opts:["REMOVE","DELETE","DISTINCT","UNIQUE"], a:2},
-  {q:"66. Which JPA annotation maps a field to a DB column?", opts:["@Column","@Field","@DB","@Table"], a:0},
-  {q:"67. Which of these is a NoSQL database?", opts:["MySQL","PostgreSQL","MongoDB","Oracle"], a:2},
-  {q:"68. Which Servlet element receives HTTP requests?", opts:["ServletContext","HttpServletRequest","HttpSession","ServletConfig"], a:1},
-  {q:"69. Which file typically holds web.xml in legacy apps?", opts:["/WEB-INF/web.xml","/META-INF/web.xml","/resources/web.xml","/static/web.xml"], a:0},
-  {q:"70. What does MVC stand for?", opts:["Model View Controller","Module View Controller","Model Variable Controller","Method View Component"], a:0},
-  {q:"71. Which annotation injects a value from properties?", opts:["@Value","@Inject","@Autowired","@Qualifier"], a:0},
-  {q:"72. What is the role of @Autowired?", opts:["Manual instantiation","Dependency injection to fields/constructors/setters","Logging","Transaction management"], a:1},
-  {q:"73. What mechanism does Spring use for configuration metadata by default?", opts:["XML","Annotations and JavaConfig","YAML only","Properties only"], a:1},
-  {q:"74. Which command builds a Maven project and packages it?", opts:["mvn compile","mvn package","mvn clean","mvn validate"], a:1},
-  {q:"75. Which data structure offers constant-time lookup on average?", opts:["Array","LinkedList","HashMap","TreeMap"], a:2},
-  {q:"76. What does SOLID represent generally?", opts:["Five design principles for OOP","A testing framework","A DB design","A logging pattern"], a:0},
-  {q:"77. Which design pattern provides a public interface to a set of interfaces in a subsystem?", opts:["Factory","Adapter","Facade","Singleton"], a:2},
-  {q:"78. Which pattern ensures only one instance of a class exists?", opts:["Prototype","Singleton","Builder","Observer"], a:1},
-  {q:"79. What is the purpose of @Repository stereotype?", opts:["Marking classes as REST controllers","Indicating data access components and translate exceptions","Defining service layer","Configuring beans"], a:1},
-  {q:"80. What is eager fetching in ORM?", opts:["Load related entities immediately","Load lazily","Fetch only IDs","Not supported"], a:0},
-  {q:"81. What is lazy fetching?", opts:["Load related entities on demand","Always load related entities","Fetch during schema update","Avoid fetching entirely"], a:0},
-  {q:"82. Which SQL clause filters rows after grouping?", opts:["WHERE","HAVING","GROUP BY","ORDER BY"], a:1},
-  {q:"83. Which annotation helps map path variable in REST endpoint?", opts:["@RequestParam","@PathVariable","@Path","@RequestBody"], a:1},
-  {q:"84. What does CORS stand for?", opts:["Cross-Origin Resource Sharing","Client-Origin Resource Service","Cross Object Resource Sync","Cross Origin REST"], a:0},
-  {q:"85. Which header is commonly used for bearer tokens?", opts:["Authorization","Auth-Token","X-API-KEY","Cookie"], a:0},
-  {q:"86. Which HTTP status code indicates client error for bad request?", opts:["400","401","403","404"], a:0},
-  {q:"87. What does ORM stand for?", opts:["Object-Relational Mapping","Object Resource Management","Open-Relational Model","Ordered Relational Mapping"], a:0},
-  {q:"88. Which JPA operation persists a new entity?", opts:["merge","persist","remove","detach"], a:1},
-  {q:"89. Which Spring module deals with security?", opts:["spring-security","spring-data","spring-web","spring-boot"], a:0},
-  {q:"90. What is the purpose of @EnableAutoConfiguration?", opts:["Disable autoconfig","Enable Spring Boot autoconfiguration based on classpath","Replace default config","Enable manual wiring only"], a:1},
-  {q:"91. Which HTTP method is used to partially update a resource?", opts:["PUT","PATCH","POST","DELETE"], a:1},
-  {q:"92. Which tool helps visualize application logs and metrics typically?", opts:["Prometheus/Grafana","Maven","JMeter","Hibernate"], a:0},
-  {q:"93. Which SQL statement adds a new row to a table?", opts:["UPDATE","DELETE","INSERT INTO","SELECT"], a:2},
-  {q:"94. Which interface supports typed results from DB queries in JPA?", opts:["EntityManager","CriteriaQuery","TypedQuery","Query"], a:2},
-  {q:"95. In microservices, what does service discovery provide?", opts:["Central config","Routing of service locations dynamically","Database replication","UI templates"], a:1},
-  {q:"96. Which testing type verifies performance under load?", opts:["Unit test","Integration test","Load test","Acceptance test"], a:2},
-  {q:"97. Which HTTP status code is 'Unauthorized'?", opts:["401","403","400","500"], a:0},
-  {q:"98. Which Java feature helps prevent memory leaks by allowing unreachable objects to be reclaimed?", opts:["Manual delete","Garbage Collection","Finalizers only","Static references"], a:1},
-  {q:"99. What does @Transactional rollback on RuntimeException do by default?", opts:["Rolls back transaction","Commits transaction","Ignores exception","Retries automatically"], a:0},
-  {q:"100. Which is recommended for building REST APIs quickly with Spring?", opts:["Raw Servlets","Spring Boot with Spring MVC","Desktop apps","Manual socket programming"], a:1}
+  // Java Essentials 1-20
+  {q: "1. Which keyword is used to define a constant variable in Java?", opts:["const","final","staticfinal","immutable"], a:1},
+  {q: "2. Which block is used to clean up resources even if an exception occurs?", opts:["finally","cleanup","catch","end"], a:0},
+  {q: "3. Which exception is thrown when accessing a null object reference?", opts:["NullPointerException","IllegalArgumentException","IOException","ArrayIndexOutOfBoundsException"], a:0},
+  {q: "4. Which feature introduced in Java 8 provides a concise way to represent anonymous functions?", opts:["Streams","Lambda expressions","Modules","Optional"], a:1},
+  {q: "5. Which annotation is used to mark a method or class for compiler-level processing?", opts:["@Process","@Annotation","@Deprecated","annotation processing usually uses custom annotations (e.g., @Override is built-in)"], a:3},
+  {q: "6. What does Optional.ofNullable(x) return if x is null?", opts:["Throws NullPointerException","An empty Optional","Optional containing null","Optional.empty() is not valid"], a:1},
+  {q: "7. Which package provides basic I/O classes like FileInputStream and FileOutputStream?", opts:["java.io","java.nio","java.file","javax.io"], a:0},
+  {q: "8. Which stream API method is used to collect results into a list?", opts:["collect(Collectors.toList())","toList()","gather()","aggregate()"], a:0},
+  {q: "9. Which statement throws a checked exception that must be handled or declared?", opts:["NullPointerException","IOException from file operations","ArithmeticException","RuntimeException"], a:1},
+  {q: "10. Which concept allows objects to be of multiple forms (subtypes) in Java?", opts:["Encapsulation","Polymorphism","Abstraction","Inheritance only"], a:1},
+  {q: "11. Which operator compares object reference equality (not contents)?", opts:["equals","==","is","compareTo"], a:1},
+  {q: "12. What is the purpose of the 'module-info.java' file introduced in Java 9 modules?", opts:["Defines module dependencies and exports","Holds properties","Replaces pom.xml","Stores annotations"], a:0},
+  {q: "13. Which stream operation does not modify the source and returns a new stream?", opts:["forEach","map","collect","close"], a:1},
+  {q: "14. Which IO class reads text efficiently line-by-line?", opts:["FileInputStream","Scanner","BufferedReader","DataInputStream"], a:2},
+  {q: "15. Which keyword is used to pass a variable number of arguments to a method?", opts:["varargs","... (ellipsis)","multi","params"], a:1},
+  {q: "16. Which Java 8 feature provides default method implementations in interfaces?", opts:["Abstract methods","Default methods","Static methods only","Functional interfaces only"], a:1},
+  {q: "17. Which term describes injection of dependencies rather than creating them internally?", opts:["Inheritance","Dependency Injection","Singleton","Factory"], a:1},
+  {q: "18. Which I/O operation is binary-safe for reading bytes? ", opts:["FileReader","FileInputStream","BufferedReader","PrintWriter"], a:1},
+  {q: "19. What does 'checked exception' mean?", opts:["Automatically handled","Must be declared or caught at compile time","Occurs only in runtime","Does not need handling"], a:1},
+  {q: "20. Which class is used to throw a user-defined exception type? ", opts:["Exception","Throwable only","RuntimeError","Error"], a:0},
+
+  // Collections 21-30
+  {q: "21. Which collection allows duplicate elements and preserves insertion order?", opts:["HashSet","TreeSet","ArrayList","LinkedHashSet"], a:2},
+  {q: "22. Which Map implementation is synchronized and thread-safe (legacy)?", opts:["HashMap","Hashtable","ConcurrentHashMap","LinkedHashMap"], a:1},
+  {q: "23. Which Collection guarantees natural sorted order?", opts:["HashSet","TreeSet","ArrayList","LinkedList"], a:1},
+  {q: "24. Which interface provides methods to add/remove from both ends of a queue?", opts:["Queue","Deque","List","Set"], a:1},
+  {q: "25. Which Collection type does Iterator belong to for traversal?", opts:["Map","Iterable","Stream","Collection only"], a:1},
+  {q: "26. Which List implementation gives constant-time positional access?", opts:["LinkedList","ArrayList","Vector","Stack"], a:1},
+  {q: "27. Which Map allows null keys and values? ", opts:["ConcurrentHashMap","TreeMap","HashMap","EnumMap"], a:2},
+  {q: "28. Which Set implementation is backed by a hash table and does not preserve order?", opts:["LinkedHashSet","TreeSet","HashSet","CopyOnWriteArraySet"], a:2},
+  {q: "29. Which collection type is ideal for FIFO behavior?", opts:["Stack","Queue","Set","Map"], a:1},
+  {q: "30. Which iterator type throws ConcurrentModificationException on structural change?", opts:["Fail-safe iterator","Fail-fast iterator","CopyOnWrite iterator","Concurrent iterator"], a:1},
+
+  // Concurrency 31-40
+  {q: "31. Which keyword ensures visibility of a variable across threads?", opts:["volatile","synchronized","transient","final"], a:0},
+  {q: "32. Which method is required by Runnable?", opts:["start()","run()","call()","execute()"], a:1},
+  {q: "33. Which class provides atomic operations for ints?", opts:["AtomicInteger","ReentrantLock","Semaphore","CountDownLatch"], a:0},
+  {q: "34. Which construct is used to protect a critical section? ", opts:["volatile","synchronized block","transient","annotation"], a:1},
+  {q: "35. What is a daemon thread?", opts:["Thread with highest priority","Background thread that doesn't prevent JVM exit","UI thread","Thread pool thread only"], a:1},
+  {q: "36. What is a CountDownLatch used for?", opts:["Increment counters safely","Wait until count reaches zero before proceeding","Locking resources","Scheduling tasks"], a:1},
+  {q: "37. Which ExecutorService method gracefully shuts down after tasks finish?", opts:["shutdownNow()","stop()","shutdown()","terminate()"], a:2},
+  {q: "38. What does thread-safe mean?", opts:["No exceptions","Safe to use by multiple threads concurrently without corruption","Faster performance","Single-threaded only"], a:1},
+  {q: "39. Which of these is a project introducing virtual threads? ", opts:["Project Loom","Project Panama","Project Valhalla","Project Amber"], a:0},
+  {q: "40. Which problem arises when multiple threads wait for locks forming a cycle?", opts:["Race condition","Deadlock","Livelock","Starvation"], a:1},
+
+  // Maven & Functional 41-45
+  {q: "41. Which file lists dependencies and build info for Maven projects?", opts:["build.gradle","pom.xml","maven.yml","pom.properties"], a:1},
+  {q: "42. Which Maven phase runs unit tests by default?", opts:["package","test","compile","verify"], a:1},
+  {q: "43. Which functional programming concept transforms elements in a stream?", opts:["filter","map","collect","peek"], a:1},
+  {q: "44. Which stream operation is terminal and triggers processing?", opts:["map","filter","forEach","peek"], a:2},
+  {q: "45. Which Maven goal packages the project into a JAR/WAR?", opts:["mvn compile","mvn package","mvn install","mvn test"], a:1},
+
+  // JDBC 46-50
+  {q: "46. Which package contains JDBC classes?", opts:["java.sql","javax.jdbc","java.db","org.jdbc"], a:0},
+  {q: "47. Which object represents a database connection in JDBC?", opts:["Statement","ResultSet","Connection","DriverManager only"], a:2},
+  {q: "48. Which JDBC class is used for parameterized SQL statements?", opts:["Statement","PreparedStatement","CallableStatement","Query"], a:1},
+  {q: "49. Which JDBC method retrieves results from a SELECT query?", opts:["executeUpdate()","executeQuery()","execute()","runQuery()"], a:1},
+  {q: "50. Which JDBC object holds the returned rows of a query?", opts:["Connection","ResultSet","Statement","Driver"], a:1},
+
+  // Spring Core (IoC, DI, Beans, MVC) 51-60
+  {q: "51. What does IoC stand for in Spring?", opts:["Input/Output Controller","Inversion of Control","Internal Object Cache","Injection of Components"], a:1},
+  {q: "52. What is Dependency Injection (DI)?", opts:["A way to create threads","Providing dependencies from outside the class","Only for testing","A DB pattern"], a:1},
+  {q: "53. Which annotation declares a Spring-managed component? ", opts:["@Bean","@Component","@Inject","@ServiceOnly"], a:1},
+  {q: "54. Which annotation is commonly used to mark a service layer class?", opts:["@Repository","@Service","@Controller","@ComponentOnly"], a:1},
+  {q: "55. What is the default scope of Spring beans?", opts:["prototype","singleton","request","session"], a:1},
+  {q: "56. Which annotation maps HTTP GET requests to a handler method?", opts:["@PostMapping","@GetMapping","@RequestMapping(method=POST)","@HandleGet"], a:1},
+  {q: "57. Which component acts as the front controller in Spring MVC?", opts:["DispatcherServlet","ServletContainer","ControllerAdvice","ViewResolver"], a:0},
+  {q: "58. What does @Autowired do?", opts:["Defines a bean","Injects bean dependencies automatically","Creates a new thread","Runs tests"], a:1},
+  {q: "59. Which annotation can provide global exception handling in Spring MVC?", opts:["@ControllerAdvice","@ExceptionHandler only","@ResponseBody","@GlobalError"], a:0},
+  {q: "60. Which annotation binds method parameter to request body?", opts:["@RequestParam","@PathVariable","@RequestBody","@ModelAttribute"], a:2},
+
+  // Hibernate 61-65
+  {q: "61. Which annotation marks a class as a JPA entity?", opts:["@Table","@Entity","@Document","@Model"], a:1},
+  {q: "62. Which annotation marks the primary key field?", opts:["@Key","@Id","@Primary","@PK"], a:1},
+  {q: "63. What is the purpose of cascading in ORM?", opts:["Improve query speed","Propagate operations (persist, remove) to related entities","Security","Mapping only"], a:1},
+  {q: "64. Which fetching strategy delays loading related entities until accessed?", opts:["Eager fetching","Lazy fetching","Immediate fetching","Batch fetching"], a:1},
+  {q: "65. What is the N+1 select problem?", opts:["A query optimization technique","Executing one query plus N queries for each returned row causing performance issues","A transaction isolation level","A caching bug"], a:1},
+
+  // Spring Boot 66-75
+  {q: "66. Which annotation boots a Spring Boot application?", opts:["@EnableBoot","@SpringBootApplication","@BootApplication","@SpringApplication"], a:1},
+  {q: "67. What is the role of Spring Boot starters?", opts:["Provide runtime server only","Opinionated dependency descriptors to simplify setup","Replace Spring core","Testing utilities only"], a:1},
+  {q: "68. Which file is commonly used for Spring Boot external configuration?", opts:["application.properties or application.yml","pom.xml","settings.xml","bootstrap.xml"], a:0},
+  {q: "69. What does Spring Boot Actuator provide?", opts:["UI templates","Production-ready endpoints for monitoring and metrics","Database ORM","Security by default"], a:1},
+  {q: "70. Which feature lets you run Spring Boot as an executable jar with an embedded server?", opts:["External Tomcat only","Embedded server auto-configuration","Manual server required","None"], a:1},
+  {q: "71. Which property controls the default server port in Spring Boot?", opts:["server.port","spring.port","application.port","boot.port"], a:0},
+  {q: "72. Which annotation is used to create REST controllers easily?", opts:["@Controller","@RestController","@WebController","@ServiceController"], a:1},
+  {q: "73. Which Spring Boot starter helps with web applications?", opts:["spring-boot-starter-data","spring-boot-starter-web","spring-boot-starter-test","spring-boot-starter-security"], a:1},
+  {q: "74. Which annotation is used to enable auto-configuration when tests run?", opts:["@EnableAutoTest","@SpringBootTest","@TestAutoConfig","@EnableAutoConfigurationTest"], a:1},
+  {q: "75. What does Spring Boot's DevTools help with?", opts:["Production security","Hot restart and developer convenience features","Database migrations","Load testing"], a:1},
+
+  // Spring Data 76-85
+  {q: "76. Which Spring Data project simplifies JPA repositories?", opts:["Spring Data JDBC","Spring Data JPA","Spring Data MongoDB","Spring Data REST"], a:1},
+  {q: "77. Which repository method signature automatically supports pagination?", opts:["findAll(Pageable pageable)","findAllPaginated()","getAll(Page page)","fetchAll(limit)"], a:0},
+  {q: "78. Which Spring Data module is used for MongoDB integration?", opts:["Spring Data JPA","Spring Data MongoDB","Spring Data JDBC","Spring Data Redis"], a:1},
+  {q: "79. Which annotation marks a repository component and translates exceptions?", opts:["@Service","@Repository","@Component","@DAO"], a:1},
+  {q: "80. Which query method name would Spring Data JPA derive from method name to find by email?", opts:["findByEmail","getEmail","queryEmail","searchEmail"], a:0},
+  {q: "81. Which database type is MongoDB?", opts:["Relational","NoSQL document store","Graph DB","Time-series DB"], a:1},
+  {q: "82. Which property allows configuring JPA dialect and behavior?", opts:["spring.jpa.*","spring.datasource.*","spring.boot.*","spring.web.*"], a:0},
+  {q: "83. What does CrudRepository provide? ", opts:["Basic CRUD methods (save, find, delete)","Only read-only methods","Only pagination","Only custom queries"], a:0},
+  {q: "84. Which annotation can customize queries for Spring Data repositories?", opts:["@Query","@Sql","@CustomQuery","@NativeQueryOnly"], a:0},
+  {q: "85. Which type of repository returns domain objects with type safety for queries?", opts:["Repository","PagingAndSortingRepository","JpaRepository","SimpleRepository"], a:2},
+
+  // Microservices (Spring Cloud) 86-90
+  {q: "86. Which Spring Cloud component is commonly used for routing and API gateway features?", opts:["Spring Cloud Config","Spring Cloud Gateway","Spring Cloud Bus","Spring Cloud Stream"], a:1},
+  {q: "87. What does Spring Cloud Config provide?", opts:["Distributed tracing","Centralized externalized configuration for distributed systems","Database pooling","Message routing"], a:1},
+  {q: "88. Which tool provides declarative REST clients in Spring Cloud?", opts:["Ribbon","Hystrix","OpenFeign","Eureka"], a:2},
+  {q: "89. What is the purpose of a circuit breaker in microservices?", opts:["Increase latency","Prevent cascading failures by short-circuiting failing calls","Route to different services","Monitor logs"], a:1},
+  {q: "90. Which component helps register and discover services (commonly used)?", opts:["Config Server","Service Registry (e.g., Eureka)","API Gateway only","Load balancer only"], a:1},
+
+  // Spring MVC / Servlets 91-95
+  {q: "91. Which class represents an HTTP request object in a servlet?", opts:["HttpServletResponse","HttpServletRequest","ServletContext","HttpSession"], a:1},
+  {q: "92. Where is web.xml typically located in a legacy WAR structure?", opts:["/WEB-INF/web.xml","/META-INF/web.xml","/static/web.xml","/resources/web.xml"], a:0},
+  {q: "93. What does MVC stand for?", opts:["Model View Controller","Module View Component","Model Variable Controller","Method View Chain"], a:0},
+  {q: "94. Which Spring component resolves views by name usually?", opts:["ViewResolver","DispatcherServlet","Controller","BeanFactory"], a:0},
+  {q: "95. Which annotation maps a path variable from the URL to a method parameter?", opts:["@RequestParam","@PathVariable","@RequestBody","@ModelAttribute"], a:1},
+
+  // Testing (JUnit, JMeter) 96-100
+  {q: "96. Which annotation marks a test method in JUnit 5?", opts:["@Test","@Before","@RunWith","@BeforeClass"], a:0},
+  {q: "97. Which library is commonly used for mocking in unit tests?", opts:["JUnit","Mockito","JMeter","Selenium"], a:1},
+  {q: "98. Which type of testing is JMeter primarily used for?", opts:["Unit testing","Integration testing only","Load and performance testing","UI testing"], a:2},
+  {q: "99. Which annotation runs before each test method in JUnit 5?", opts:["@BeforeAll","@BeforeEach","@After","@Before"], a:1},
+  {q: "100. What does an assertion in a unit test verify?", opts:["That the test runs fast","That expected outcome matches actual outcome","That database exists","That UI renders"], a:1}
 ];
 
+// UI and logic
 const quizEl = document.getElementById('quiz');
 let answered = 0, score = 0;
 
-function render(){
+function render() {
+  quizEl.innerHTML = '';
   questions.forEach((item, idx) => {
     const card = document.createElement('div');
     card.className = 'question-card';
-    card.id = 'q'+(idx+1);
+    card.id = 'q' + (idx+1);
     card.innerHTML = `
-      <div class="qmeta"><div class="qnum">Q${idx+1}. ${item.q}</div><div class="small">Question ${idx+1} / ${questions.length}</div></div>
+      <div class="qmeta"><div class="qnum">Q${idx+1}</div><div class="small">Module Q${idx+1} / 100</div></div>
+      <div class="qtext">${item.q}</div>
       <div class="options" id="opts-${idx}"></div>
       <div class="feedback" id="fb-${idx}"></div>
     `;
@@ -180,7 +240,7 @@ function render(){
       btn.tabIndex = 0;
       btn.dataset.q = idx;
       btn.dataset.o = oi;
-      btn.innerText = String.fromCharCode(65+oi)+') ' + opt;
+      btn.innerText = String.fromCharCode(65+oi) + ') ' + opt;
       btn.addEventListener('click', onSelect);
       btn.addEventListener('keydown', (e)=>{ if(e.key==='Enter') onSelect.call(btn,e); });
       optsEl.appendChild(btn);
@@ -188,67 +248,75 @@ function render(){
   });
 }
 
-function onSelect(e){
+function onSelect(e) {
   const el = this === window ? e.currentTarget : this;
   const qIdx = Number(el.dataset.q);
   const optIdx = Number(el.dataset.o);
   const fb = document.getElementById('fb-'+qIdx);
   const optsContainer = document.getElementById('opts-'+qIdx);
-  if(optsContainer.classList.contains('answered')) return; // prevent double
+  if (!optsContainer || optsContainer.classList.contains('answered')) return;
 
-  // mark answered
   optsContainer.classList.add('answered');
   answered++;
   document.getElementById('answeredCount').innerText = answered;
   const progressPercent = Math.round((answered / questions.length) * 100);
   document.getElementById('progressBar').style.width = progressPercent + '%';
 
-  // determine correct
   const correctIndex = questions[qIdx].a;
   const children = Array.from(optsContainer.children);
-  children.forEach((c,i)=>{
+  children.forEach((c,i) => {
     c.classList.add('disabled');
-    if(i===correctIndex){ c.classList.add('correct'); }
-    if(i===optIdx && i !== correctIndex){ c.classList.add('wrong'); }
+    if (i === correctIndex) c.classList.add('correct');
+    if (i === optIdx && i !== correctIndex) c.classList.add('wrong');
   });
 
-  if(optIdx === correctIndex){ score++; fb.innerText = 'Correct ✅'; fb.style.color = 'var(--correct)'; }
-  else { fb.innerText = 'Wrong ❌ — Correct answer: ' + String.fromCharCode(65+correctIndex) + ') ' + questions[qIdx].opts[correctIndex]; fb.style.color = 'var(--wrong)'; }
-
-  // update final display score partially
+  if (optIdx === correctIndex) {
+    score++;
+    fb.innerHTML = 'Correct, my love ❤️';
+    fb.style.color = 'var(--correct)';
+  } else {
+    fb.innerHTML = 'Not quite 💔 — Correct: ' + String.fromCharCode(65+correctIndex) + ') ' + questions[qIdx].opts[correctIndex] + ' — still love you 💕';
+    fb.style.color = 'var(--wrong)';
+  }
   document.getElementById('finalScore').innerText = `Score: ${score} / ${questions.length}`;
 }
 
-// show final score button
-document.getElementById('showScore').addEventListener('click', ()=>{
-  // mark unanswered questions as reveal
-  for(let i=0;i<questions.length;i++){
+document.getElementById('showScore').addEventListener('click', () => {
+  // reveal unanswered and finalize score
+  for (let i = 0; i < questions.length; i++) {
     const optsContainer = document.getElementById('opts-'+i);
     const fb = document.getElementById('fb-'+i);
-    if(!optsContainer.classList.contains('answered')){
-      // reveal correct
+    if (!optsContainer) continue;
+    if (!optsContainer.classList.contains('answered')) {
       optsContainer.classList.add('answered');
       answered++;
       document.getElementById('answeredCount').innerText = answered;
       const correctIndex = questions[i].a;
       const children = Array.from(optsContainer.children);
-      children.forEach((c,ci)=>{ c.classList.add('disabled'); if(ci===correctIndex) c.classList.add('correct'); });
-      fb.innerText = 'Not answered — Correct: '+ String.fromCharCode(65+correctIndex) +') '+questions[i].opts[correctIndex];
-      fb.style.color = 'var(--muted)';
+      children.forEach((c,ci) => {
+        c.classList.add('disabled');
+        if (ci === correctIndex) c.classList.add('correct');
+      });
+      if (fb) {
+        fb.innerHTML = 'Not answered — Correct: ' + String.fromCharCode(65+correctIndex) + ') ' + questions[i].opts[correctIndex];
+        fb.style.color = 'var(--muted)';
+      }
     }
   }
   document.getElementById('finalScore').innerText = `Final Score: ${score} / ${questions.length}`;
   document.getElementById('progressBar').style.width = '100%';
 });
 
-// reset
-document.getElementById('resetBtn').addEventListener('click', ()=>{
-  if(!confirm('Reset all answers and score?')) return;
-  // clear
-  quizEl.innerHTML=''; answered=0; score=0; document.getElementById('answeredCount').innerText=0; document.getElementById('finalScore').innerText='Score: 0 / 100'; document.getElementById('progressBar').style.width='0%';
+document.getElementById('resetBtn').addEventListener('click', () => {
+  if (!confirm('Reset all answers and score?')) return;
+  answered = 0; score = 0;
+  document.getElementById('answeredCount').innerText = 0;
+  document.getElementById('finalScore').innerText = `Score: 0 / ${questions.length}`;
+  document.getElementById('progressBar').style.width = '0%';
   render();
 });
 
+// initial render
 render();
 </script>
 </body>
